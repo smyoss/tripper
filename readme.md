@@ -1,0 +1,1 @@
+This application will be used to assist with planning roadtrips and vacations. 
