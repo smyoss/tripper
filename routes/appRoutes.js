@@ -9,5 +9,6 @@ module.exports = function(app) {
 
   app.route('/users/:userId')
     .get(user.getById)
-    .delete(user.deleteById);
+    .delete(user.deleteById)
+    .put(user.updateById);
 };

@@ -48,3 +48,13 @@ exports.deleteById = function(req, res) {
         res.json({message: 'User deleted'});
     });
 };
+
+//update a specific user by id
+exports.updateById = function(req, res){
+    User.updateById(req.params.userId, new User(req.body), function(err, user) {
+    if(err)
+        res.send(err);
+    res.json(user);
+
+    });
+};

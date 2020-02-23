@@ -44,6 +44,7 @@ User.createUser = function(newUser, result) {
     });
 };
 
+//get a specific user by id 
 User.getById = function (userId, result) {
     sql.query("SELECT * FROM users WHERE id = ?", userId, function(err, res){
         if(err){
@@ -55,6 +56,7 @@ User.getById = function (userId, result) {
     });
 };
 
+//delete a specific user by id 
 User.deleteById = function(userId, result) {
     sql.query('DELETE FROM users WHERE id =?', userId, function(err, res) {
         if(err){
@@ -63,6 +65,19 @@ User.deleteById = function(userId, result) {
         }
         else{ result(null, res);
         }
+    });
+};
+
+//update a specific user by id
+User.updateById = function(userId, email, result) {
+    sql.query('UPDATE users SET email = ? WHERE id = ?', [User.email, User.id], function(err, res) {
+        if(err) {
+            console.log("error: ", err);
+              result(null, err);
+           }
+         else{   
+           result(null, res);
+              }
     });
 };
 
