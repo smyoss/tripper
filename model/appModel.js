@@ -55,4 +55,15 @@ User.getById = function (userId, result) {
     });
 };
 
+User.deleteById = function(userId, result) {
+    sql.query('DELETE FROM users WHERE id =?', userId, function(err, res) {
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else{ result(null, res);
+        }
+    });
+};
+
 module.exports= User;

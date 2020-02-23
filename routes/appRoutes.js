@@ -8,5 +8,6 @@ module.exports = function(app) {
     .post(user.create_user);
 
   app.route('/users/:userId')
-    .get(user.getById);
+    .get(user.getById)
+    .delete(user.deleteById);
 };

@@ -39,3 +39,12 @@ exports.getById = function(req, res) {
     });
 
 };
+
+// delete a specific user
+exports.deleteById = function(req, res) {
+    User.deleteById(req.params.userId, function(err, user) {
+        if(err)
+        res.send(err);
+        res.json({message: 'User deleted'});
+    });
+};
