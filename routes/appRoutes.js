@@ -1,7 +1,12 @@
-'use strict';
+"use strict";
 module.exports = function(app) {
-  var todoList = require('../controllers/todoListController');
+  var user = require("../controller/appController.js");
 
-  // todoList Routes
+  // User Routes
+  app.route('/users')
+    .get(user.list_all_users)
+    .post(user.create_user);
 
-    };
+  app.route('/users/:userId')
+    .get(user.getById);
+};
