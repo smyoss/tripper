@@ -369,6 +369,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `firstName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `lastName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `status` tinyint(1) DEFAULT NULL,
   `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
   `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
   `userCreated` int(10) DEFAULT NULL,
@@ -378,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `FK_Users_Users` (`userCreated`),
   CONSTRAINT `FK_Users_Users` FOREIGN KEY (`userCreated`) REFERENCES `users` (`ID`),
   CONSTRAINT `FK_Users_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
