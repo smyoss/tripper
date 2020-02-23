@@ -16,369 +16,369 @@
 CREATE DATABASE IF NOT EXISTS `dev-tripper` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `dev-tripper`;
 
--- Dumping structure for table dev-tripper.Equipment
-CREATE TABLE IF NOT EXISTS `Equipment` (
-  `ID` int(10) NOT NULL,
-  `Title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Category` int(10) DEFAULT NULL,
-  `Location` int(10) DEFAULT NULL,
-  `Quantity On Hand` int(10) DEFAULT NULL,
-  `Status` tinyint(1) DEFAULT NULL,
-  `IsMaintenance` tinyint(1) DEFAULT NULL,
-  `SerialNumber` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(11) DEFAULT NULL,
-  `UserModified` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Created By` (`UserCreated`),
-  KEY `Category` (`Category`),
-  KEY `Location` (`Location`),
-  KEY `Updated By` (`UserModified`),
-  CONSTRAINT `Category` FOREIGN KEY (`Category`) REFERENCES `Lookups` (`ID`),
-  CONSTRAINT `Created By` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `Location` FOREIGN KEY (`Location`) REFERENCES `Lookups` (`ID`),
-  CONSTRAINT `Updated By` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.equipment
+CREATE TABLE IF NOT EXISTS `equipment` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` int(10) DEFAULT NULL,
+  `location` int(10) DEFAULT NULL,
+  `quantityOnHand` int(10) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `isMaintenance` tinyint(1) DEFAULT NULL,
+  `serialNumber` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(11) DEFAULT NULL,
+  `userModified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Created By` (`userCreated`),
+  KEY `Category` (`category`),
+  KEY `Location` (`location`),
+  KEY `Updated By` (`userModified`),
+  CONSTRAINT `Category` FOREIGN KEY (`category`) REFERENCES `lookups` (`ID`),
+  CONSTRAINT `Created By` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `Location` FOREIGN KEY (`Location`) REFERENCES `lookups` (`ID`),
+  CONSTRAINT `Updated By` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Locations
-CREATE TABLE IF NOT EXISTS `Locations` (
-  `ID` int(10) NOT NULL,
-  `Title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Street` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `City` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `State` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Zip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Status` tinyint(1) NOT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(11) DEFAULT NULL,
-  `UserModified` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `User Created` (`UserCreated`),
-  KEY `Modified User` (`UserModified`),
-  CONSTRAINT `Modified User` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `User Created` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.locations
+CREATE TABLE IF NOT EXISTS `locations` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `street` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(11) DEFAULT NULL,
+  `userModified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `User Created` (`userCreated`),
+  KEY `Modified User` (`userModified`),
+  CONSTRAINT `Modified User` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `User Created` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.LocationsExtended
-CREATE TABLE IF NOT EXISTS `LocationsExtended` (
-  `ID` int(10) NOT NULL,
-  `LocationId` int(10) DEFAULT NULL,
-  `UserCreated` int(11) DEFAULT NULL,
-  `UserModified` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Location Id` (`LocationId`),
-  KEY `UserModified` (`UserModified`),
-  KEY `UserCreated` (`UserCreated`),
-  CONSTRAINT `Location Id` FOREIGN KEY (`LocationId`) REFERENCES `Locations` (`ID`),
-  CONSTRAINT `UserCreated` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `UserModified` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.locationsExtended
+CREATE TABLE IF NOT EXISTS `locationsExtended` (
+  `id` int(10) NOT NULL,
+  `locationId` int(10) DEFAULT NULL,
+  `userCreated` int(11) DEFAULT NULL,
+  `userModified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Location Id` (`locationId`),
+  KEY `UserCreated` (`userCreated`),
+  KEY `UserModified` (`userModified`),
+  CONSTRAINT `Location Id` FOREIGN KEY (`locationId`) REFERENCES `locations` (`ID`),
+  CONSTRAINT `UserCreated` FOREIGN KEY (`userCreated`) REFERENCES `users` (`id`),
+  CONSTRAINT `UserModified` FOREIGN KEY (`userModified`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Log
-CREATE TABLE IF NOT EXISTS `Log` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Entity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Action` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `UserId` int(11) DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(11) DEFAULT NULL,
-  `UserModified` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Modified User Log` (`UserModified`),
-  KEY `Created User Log` (`UserCreated`),
-  CONSTRAINT `Created User Log` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `Modified User Log` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.log
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `table` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(11) DEFAULT NULL,
+  `userModified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Modified User Log` (`userModified`),
+  KEY `Created User Log` (`userCreated`),
+  CONSTRAINT `Created User Log` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `Modified User Log` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Lookups
-CREATE TABLE IF NOT EXISTS `Lookups` (
-  `ID` int(10) NOT NULL,
-  `Entity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Status` tinyint(1) NOT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(11) DEFAULT NULL,
-  `UserModified` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_Lookups_Users` (`UserCreated`),
-  KEY `FK_Lookups_Users_2` (`UserModified`),
-  CONSTRAINT `FK_Lookups_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_Lookups_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.lookups
+CREATE TABLE IF NOT EXISTS `lookups` (
+  `id` int(10) NOT NULL,
+  `table` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(11) DEFAULT NULL,
+  `userModified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Lookups_Users` (`userCreated`),
+  KEY `FK_Lookups_Users_2` (`userModified`),
+  CONSTRAINT `FK_Lookups_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_Lookups_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Maintenance
-CREATE TABLE IF NOT EXISTS `Maintenance` (
-  `ID` int(10) NOT NULL,
-  `EquipmentId` int(10) DEFAULT NULL,
-  `Comment` longtext COLLATE utf8mb4_unicode_ci,
-  `DateMaintained` datetime DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `EquipmentMaintence` (`EquipmentId`),
-  KEY `UserCreatedMaintence` (`UserCreated`),
-  KEY `UserModifiedMaintence` (`UserModified`),
-  CONSTRAINT `EquipmentMaintence` FOREIGN KEY (`EquipmentId`) REFERENCES `Equipment` (`ID`),
-  CONSTRAINT `UserCreatedMaintence` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `UserModifiedMaintence` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.maintenance
+CREATE TABLE IF NOT EXISTS `maintenance` (
+  `id` int(10) NOT NULL,
+  `equipmentId` int(10) DEFAULT NULL,
+  `comment` longtext COLLATE utf8mb4_unicode_ci,
+  `dateMaintained` datetime DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `EquipmentMaintence` (`equipmentId`),
+  KEY `UserCreatedMaintence` (`userCreated`),
+  KEY `UserModifiedMaintence` (`userModified`),
+  CONSTRAINT `EquipmentMaintence` FOREIGN KEY (`EquipmentId`) REFERENCES `equipment` (`ID`),
+  CONSTRAINT `UserCreatedMaintence` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `UserModifiedMaintence` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Meals
-CREATE TABLE IF NOT EXISTS `Meals` (
-  `ID` int(10) NOT NULL,
-  `Title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Category` int(10) DEFAULT NULL,
-  `Cuisine` int(10) DEFAULT NULL,
-  `Receipe` longtext COLLATE utf8mb4_unicode_ci,
-  `Ingredients` longtext COLLATE utf8mb4_unicode_ci,
-  `Status` tinyint(1) NOT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `LookupsMeals1` (`Cuisine`),
-  KEY `LookupsMeals` (`Category`),
-  KEY `FK_Meals_Users` (`UserCreated`),
-  KEY `FK_Meals_Users_2` (`UserModified`),
-  CONSTRAINT `FK_Meals_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_Meals_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `LookupsMeals` FOREIGN KEY (`Category`) REFERENCES `Lookups` (`ID`),
-  CONSTRAINT `LookupsMeals1` FOREIGN KEY (`Cuisine`) REFERENCES `Lookups` (`ID`)
+-- Dumping structure for table dev-tripper.meals
+CREATE TABLE IF NOT EXISTS `meals` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` int(10) DEFAULT NULL,
+  `cuisine` int(10) DEFAULT NULL,
+  `receipe` longtext COLLATE utf8mb4_unicode_ci,
+  `ingredients` longtext COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `LookupsMeals1` (`cuisine`),
+  KEY `LookupsMeals` (`category`),
+  KEY `FK_Meals_Users` (`userCreated`),
+  KEY `FK_Meals_Users_2` (`userModified`),
+  CONSTRAINT `FK_Meals_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_Meals_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `LookupsMeals` FOREIGN KEY (`Category`) REFERENCES `lookups` (`ID`),
+  CONSTRAINT `LookupsMeals1` FOREIGN KEY (`Cuisine`) REFERENCES `lookups` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.People
-CREATE TABLE IF NOT EXISTS `People` (
-  `ID` int(10) NOT NULL,
-  `FirstName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `LastName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FullName` varchar(243) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Status` tinyint(1) NOT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_People_Users` (`UserCreated`),
-  KEY `FK_People_Users_2` (`UserModified`),
-  CONSTRAINT `FK_People_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_People_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
+-- Dumping structure for table dev-tripper.people
+CREATE TABLE IF NOT EXISTS `people` (
+  `id` int(10) NOT NULL,
+  `firstName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullName` varchar(243) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_People_Users` (`userCreated`),
+  KEY `FK_People_Users_2` (`userModified`),
+  CONSTRAINT `FK_People_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_People_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Trip
-CREATE TABLE IF NOT EXISTS `Trip` (
-  `ID` int(10) NOT NULL,
-  `Title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Category` int(10) DEFAULT NULL,
-  `StartDate` int(10) DEFAULT NULL,
-  `EndDate` int(10) DEFAULT NULL,
-  `Status` tinyint(1) NOT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `LookupsTrips` (`Category`),
-  KEY `FK_Trip_Users` (`UserCreated`),
-  KEY `FK_Trip_Users_2` (`UserModified`),
-  CONSTRAINT `FK_Trip_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_Trip_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `LookupsTrips` FOREIGN KEY (`Category`) REFERENCES `Lookups` (`ID`)
+-- Dumping structure for table dev-tripper.trip
+CREATE TABLE IF NOT EXISTS `trip` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` int(10) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `LookupsTrips` (`category`),
+  KEY `FK_Trip_Users` (`userCreated`),
+  KEY `FK_Trip_Users_2` (`userModified`),
+  CONSTRAINT `FK_Trip_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_Trip_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `LookupsTrips` FOREIGN KEY (`Category`) REFERENCES `lookups` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.TripEquipment
-CREATE TABLE IF NOT EXISTS `TripEquipment` (
-  `ID` int(10) NOT NULL,
-  `TripId` int(10) DEFAULT NULL,
-  `EquipmentId` int(10) DEFAULT NULL,
-  `QuantityPacked` int(10) DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `EquipmentInventoryTripEquipment` (`EquipmentId`),
-  KEY `TripTripEquipment` (`TripId`),
-  KEY `FK_TripEquipment_Users` (`UserCreated`),
-  KEY `FK_TripEquipment_Users_2` (`UserModified`),
-  CONSTRAINT `EquipmentInventoryTripEquipment` FOREIGN KEY (`EquipmentId`) REFERENCES `Equipment` (`ID`),
-  CONSTRAINT `FK_TripEquipment_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_TripEquipment_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `TripTripEquipment` FOREIGN KEY (`TripId`) REFERENCES `Trip` (`ID`)
+-- Dumping structure for table dev-tripper.tripEquipment
+CREATE TABLE IF NOT EXISTS `tripEquipment` (
+  `id` int(10) NOT NULL,
+  `tripId` int(10) DEFAULT NULL,
+  `equipmentId` int(10) DEFAULT NULL,
+  `quantityPacked` int(10) DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `EquipmentInventoryTripEquipment` (`equipmentId`),
+  KEY `TripTripEquipment` (`tripId`),
+  KEY `FK_TripEquipment_Users` (`userCreated`),
+  KEY `FK_TripEquipment_Users_2` (`userModified`),
+  CONSTRAINT `EquipmentInventoryTripEquipment` FOREIGN KEY (`EquipmentId`) REFERENCES `equipment` (`ID`),
+  CONSTRAINT `FK_TripEquipment_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_TripEquipment_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `TripTripEquipment` FOREIGN KEY (`TripId`) REFERENCES `trip` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.TripExtended
-CREATE TABLE IF NOT EXISTS `TripExtended` (
-  `ID` int(10) NOT NULL,
-  `TripId` int(10) DEFAULT NULL,
-  `Dog` tinyint(1) NOT NULL,
-  `TravelTrailer` tinyint(1) NOT NULL,
-  `Truck` tinyint(1) NOT NULL,
-  `Skiing` tinyint(1) NOT NULL,
-  `Fireworks` tinyint(1) NOT NULL,
-  `RvPark` tinyint(1) NOT NULL,
-  `Beach` tinyint(1) NOT NULL,
-  `Desert` tinyint(1) NOT NULL,
-  `Water/Beach` tinyint(1) NOT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `TripsTripExtended` (`TripId`),
-  KEY `FK_TripExtended_Users` (`UserCreated`),
-  KEY `FK_TripExtended_Users_2` (`UserModified`),
-  CONSTRAINT `FK_TripExtended_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_TripExtended_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `TripsTripExtended` FOREIGN KEY (`TripId`) REFERENCES `Trip` (`ID`)
+-- Dumping structure for table dev-tripper.tripExtended
+CREATE TABLE IF NOT EXISTS `tripExtended` (
+  `id` int(10) NOT NULL,
+  `tripId` int(10) DEFAULT NULL,
+  `dog` tinyint(1) NOT NULL,
+  `travelTrailer` tinyint(1) NOT NULL,
+  `truck` tinyint(1) NOT NULL,
+  `skiing` tinyint(1) NOT NULL,
+  `fireworks` tinyint(1) NOT NULL,
+  `rvPark` tinyint(1) NOT NULL,
+  `beach` tinyint(1) NOT NULL,
+  `desert` tinyint(1) NOT NULL,
+  `water` tinyint(1) NOT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `TripsTripExtended` (`tripId`),
+  KEY `FK_TripExtended_Users` (`userCreated`),
+  KEY `FK_TripExtended_Users_2` (`userModified`),
+  CONSTRAINT `FK_TripExtended_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_TripExtended_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `TripsTripExtended` FOREIGN KEY (`TripId`) REFERENCES `trip` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.TripLocations
-CREATE TABLE IF NOT EXISTS `TripLocations` (
-  `ID` int(10) NOT NULL,
-  `TripId` int(10) DEFAULT NULL,
-  `LocationId` int(10) DEFAULT NULL,
-  `Category` int(10) DEFAULT NULL,
-  `ArrivalDate` int(10) DEFAULT NULL,
-  `DepartureDate` int(10) DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `LookupsTripLocations` (`Category`),
-  KEY `TripsTripLocations` (`TripId`),
-  KEY `LocationsTripLocations` (`LocationId`),
-  KEY `FK_TripLocations_Users` (`UserCreated`),
-  KEY `FK_TripLocations_Users_2` (`UserModified`),
-  CONSTRAINT `FK_TripLocations_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_TripLocations_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `LocationsTripLocations` FOREIGN KEY (`LocationId`) REFERENCES `Locations` (`ID`),
-  CONSTRAINT `LookupsTripLocations` FOREIGN KEY (`Category`) REFERENCES `Lookups` (`ID`),
-  CONSTRAINT `TripsTripLocations` FOREIGN KEY (`TripId`) REFERENCES `Trip` (`ID`)
+-- Dumping structure for table dev-tripper.tripLocations
+CREATE TABLE IF NOT EXISTS `tripLocations` (
+  `id` int(10) NOT NULL,
+  `tripId` int(10) DEFAULT NULL,
+  `locationId` int(10) DEFAULT NULL,
+  `category` int(10) DEFAULT NULL,
+  `arrivalDate` int(10) DEFAULT NULL,
+  `departureDate` int(10) DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `LookupsTripLocations` (`category`),
+  KEY `TripsTripLocations` (`tripId`),
+  KEY `LocationsTripLocations` (`locationId`),
+  KEY `FK_TripLocations_Users_2` (`userModified`),
+  KEY `FK_TripLocations_Users` (`userCreated`),
+  CONSTRAINT `FK_TripLocations_Users` FOREIGN KEY (`userCreated`) REFERENCES `users` (`id`),
+  CONSTRAINT `FK_TripLocations_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `LocationsTripLocations` FOREIGN KEY (`LocationId`) REFERENCES `locations` (`ID`),
+  CONSTRAINT `LookupsTripLocations` FOREIGN KEY (`Category`) REFERENCES `lookups` (`ID`),
+  CONSTRAINT `TripsTripLocations` FOREIGN KEY (`TripId`) REFERENCES `trip` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.TripMeals
-CREATE TABLE IF NOT EXISTS `TripMeals` (
-  `ID` int(10) NOT NULL,
-  `MealId` int(10) DEFAULT NULL,
-  `TripId` int(10) DEFAULT NULL,
-  `PeopleId` int(10) DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `TripTripMeals` (`TripId`),
-  KEY `PeopleTripMeals` (`PeopleId`),
-  KEY `MealsTripMeals` (`MealId`),
-  KEY `FK_TripMeals_Users` (`UserCreated`),
-  KEY `FK_TripMeals_Users_2` (`UserModified`),
-  CONSTRAINT `FK_TripMeals_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_TripMeals_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `MealsTripMeals` FOREIGN KEY (`MealId`) REFERENCES `Meals` (`ID`),
-  CONSTRAINT `PeopleTripMeals` FOREIGN KEY (`PeopleId`) REFERENCES `People` (`ID`),
-  CONSTRAINT `TripTripMeals` FOREIGN KEY (`TripId`) REFERENCES `Trip` (`ID`)
+-- Dumping structure for table dev-tripper.tripMeals
+CREATE TABLE IF NOT EXISTS `tripMeals` (
+  `id` int(10) NOT NULL,
+  `mealId` int(10) DEFAULT NULL,
+  `tripId` int(10) DEFAULT NULL,
+  `peopleId` int(10) DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `TripTripMeals` (`tripId`),
+  KEY `PeopleTripMeals` (`peopleId`),
+  KEY `MealsTripMeals` (`mealId`),
+  KEY `FK_TripMeals_Users` (`userCreated`),
+  KEY `FK_TripMeals_Users_2` (`userModified`),
+  CONSTRAINT `FK_TripMeals_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_TripMeals_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `MealsTripMeals` FOREIGN KEY (`MealId`) REFERENCES `meals` (`ID`),
+  CONSTRAINT `PeopleTripMeals` FOREIGN KEY (`PeopleId`) REFERENCES `people` (`ID`),
+  CONSTRAINT `TripTripMeals` FOREIGN KEY (`TripId`) REFERENCES `trip` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.TripPeople
-CREATE TABLE IF NOT EXISTS `TripPeople` (
-  `ID` int(10) NOT NULL,
-  `PeopleId` int(10) DEFAULT NULL,
-  `TripId` int(10) DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `TripTripPeople` (`TripId`),
-  KEY `PeopleTripPeople` (`PeopleId`),
-  KEY `FK_TripPeople_Users` (`UserCreated`),
-  KEY `FK_TripPeople_Users_2` (`UserModified`),
-  CONSTRAINT `FK_TripPeople_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_TripPeople_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `PeopleTripPeople` FOREIGN KEY (`PeopleId`) REFERENCES `People` (`ID`),
-  CONSTRAINT `TripTripPeople` FOREIGN KEY (`TripId`) REFERENCES `Trip` (`ID`)
+-- Dumping structure for table dev-tripper.tripPeople
+CREATE TABLE IF NOT EXISTS `tripPeople` (
+  `id` int(10) NOT NULL,
+  `peopleId` int(10) DEFAULT NULL,
+  `tripId` int(10) DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `TripTripPeople` (`tripId`),
+  KEY `PeopleTripPeople` (`peopleId`),
+  KEY `FK_TripPeople_Users` (`userCreated`),
+  KEY `FK_TripPeople_Users_2` (`userModified`),
+  CONSTRAINT `FK_TripPeople_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_TripPeople_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `PeopleTripPeople` FOREIGN KEY (`PeopleId`) REFERENCES `people` (`ID`),
+  CONSTRAINT `TripTripPeople` FOREIGN KEY (`TripId`) REFERENCES `trip` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.TripShopping
-CREATE TABLE IF NOT EXISTS `TripShopping` (
-  `ID` int(10) NOT NULL,
-  `Title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Category` int(10) DEFAULT NULL,
-  `Store` int(10) DEFAULT NULL,
-  `Quantity` int(10) DEFAULT NULL,
-  `Note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `LookupsShopping` (`Category`),
-  KEY `LookupsShopping1` (`Store`),
-  KEY `FK_TripShopping_Users` (`UserCreated`),
-  KEY `FK_TripShopping_Users_2` (`UserModified`),
-  CONSTRAINT `FK_TripShopping_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_TripShopping_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `LookupsShopping` FOREIGN KEY (`Category`) REFERENCES `Lookups` (`ID`),
-  CONSTRAINT `LookupsShopping1` FOREIGN KEY (`Store`) REFERENCES `Lookups` (`ID`)
+-- Dumping structure for table dev-tripper.tripShopping
+CREATE TABLE IF NOT EXISTS `tripShopping` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` int(10) DEFAULT NULL,
+  `store` int(10) DEFAULT NULL,
+  `quantity` int(10) DEFAULT NULL,
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `LookupsShopping` (`category`),
+  KEY `LookupsShopping1` (`store`),
+  KEY `FK_TripShopping_Users` (`userCreated`),
+  KEY `FK_TripShopping_Users_2` (`userModified`),
+  CONSTRAINT `FK_TripShopping_Users` FOREIGN KEY (`UserCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_TripShopping_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`),
+  CONSTRAINT `LookupsShopping` FOREIGN KEY (`Category`) REFERENCES `lookups` (`ID`),
+  CONSTRAINT `LookupsShopping1` FOREIGN KEY (`Store`) REFERENCES `lookups` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dev-tripper.Users
-CREATE TABLE IF NOT EXISTS `Users` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `FirstName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `LastName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `TimeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TimeModified` datetime DEFAULT CURRENT_TIMESTAMP,
-  `UserCreated` int(10) DEFAULT NULL,
-  `UserModified` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_Users_Users` (`UserCreated`),
-  KEY `FK_Users_Users_2` (`UserModified`),
-  CONSTRAINT `FK_Users_Users` FOREIGN KEY (`UserCreated`) REFERENCES `Users` (`ID`),
-  CONSTRAINT `FK_Users_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `Users` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- Dumping structure for table dev-tripper.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `firstName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `lastName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `timeCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `timeModified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `userCreated` int(10) DEFAULT NULL,
+  `userModified` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Users_Users_2` (`userModified`),
+  KEY `FK_Users_Users` (`userCreated`),
+  CONSTRAINT `FK_Users_Users` FOREIGN KEY (`userCreated`) REFERENCES `users` (`ID`),
+  CONSTRAINT `FK_Users_Users_2` FOREIGN KEY (`UserModified`) REFERENCES `users` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
