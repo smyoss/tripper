@@ -12,8 +12,8 @@ app.get('/about', function(req, res) {
   res.render('pages/about');
 });
 
-app.get('/users', function(req, res) {
-  res.render('pages/users');
+app.get('/table', function(req, res) {
+  res.render('pages/table');
 });
   // API STUFF 
   // API User Routes
