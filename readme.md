@@ -1,4 +1,4 @@
-<img src="/assets/img/car.png">
+<p style="text-align: center;"><img src="/assets/img/car.png" style="max-width: 300px;"></p>
 <h1>Tripper</h1>
 <h2>Making Organizing and Planning Trips Easy and Efficient </h2>
 
@@ -9,7 +9,7 @@
 <li> Travel Locations</li>
 <li>Equipment & Maintence</li>
 <li>People</li>
-<li>Shopping</li>
+<li>Shopping</li></ul>
 </p>
 
 <h4>Please stay tuned! Thanks. </h4>
