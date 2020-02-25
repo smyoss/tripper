@@ -1,4 +1,4 @@
-<p style="text-align: center;"><img src="/assets/img/car.png" style="max-width: 300px;"></p>
+<p style="text-align: center;"><img src="/assets/img/car.png" style="width: 200px;"></p>
 <h1>Tripper</h1>
 <h2>Making Organizing and Planning Trips Easy and Efficient </h2>
 
