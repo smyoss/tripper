@@ -1,6 +1,7 @@
 "use strict";
 
-var User = require("../model/appModel.js");
+const User = require("../model/appModel.js");
+const Joi = require("@hapi/joi");
 
 //user functions
 
@@ -16,14 +17,21 @@ exports.list_all_users = function(req, res) {
 
 //create a user
 exports.create_user = function(req, res) {
-  var newUser = new User(req.body);
-  console.log(newUser);
+  const schema = Joi.object ({
+    firstName : Joi.string().min(3).required(),
+    lastName: Joi.string().min(3).required(), 
+    password: Joi.string().min(5).required(),
+    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } } ).required(),
+  });
+  
+  const result = schema.validate(req.body)
 
-  //handles null error
-  if (!newUser.email || !newUser.firstName || !newUser.lastName || !newUser.password) {
+  if (result.error) {
+    //400 bad request
     res.status(400).send({ error: true, message: "Missing user details. Please check your reqest." });
+
   } else {
-    User.createUser(newUser, function(err, user) {
+    User.createUser(result, function(err, user) {
       if (err) res.send(err);
       res.json(user);
     });

@@ -1,5 +1,6 @@
 'user strict';
-var sql = require('./db.js');
+const sql = require('./db.js');
+const Joi = require('@hapi/joi');
 
 //User Functions
 

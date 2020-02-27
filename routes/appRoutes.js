@@ -7,15 +7,15 @@ module.exports = function(app) {
     res.render("pages/index");
   });
 
-// about page 
-app.get('/about', function(req, res) {
-  res.render('pages/about');
-});
+  app.get("/about", function(req, res) {
+    res.render("pages/about");
+  });
 
-app.get('/table', function(req, res) {
-  res.render('pages/table');
-});
-  // API STUFF 
+  app.get("/table", function(req, res) {
+    res.render("pages/table");
+  });
+  
+  // API STUFF
   // API User Routes
   app
     .route("/users")
