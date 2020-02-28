@@ -1,19 +1,20 @@
 'user strict';
 const sql = require('./db.js');
-const Joi = require('@hapi/joi');
 
 //User Functions
 
 //User Object Constructor
-var User = function(user) {
+let User = function(user) {
     this.id = user.id;
     this.firstName = user.firstName;
-    this.lastName = user.lastName;
+    this.lastName = user.lastName;S
     this.password = user.password;
     this.email = user.email;
-    this.status = user.status;
-    this.timeCreated = new Date();
-    this.timeModified = new Date();
+    this.status = 1;
+    //this.timeCreated = new Date();
+    //this.timeModified = new Date();
+    this.userCreated = 1;
+    this.userModified = 1;
 };
 
 //get a listing of all users
@@ -32,8 +33,9 @@ User.getAllUsers = function(result) {
 };
 
 //create a new user account
+
 User.createUser = function(newUser, result) {
-    sql.query("INSERT INTO users SET ?", newUser, function(err, res){
+    sql.query("INSERT INTO `users` SET ?", newUser.value, function(err,res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);

@@ -28,7 +28,7 @@ exports.create_user = function(req, res) {
 
   if (result.error) {
     //400 bad request
-    res.status(400).send({ error: true, message: "Missing user details. Please check your reqest." });
+    res.status(400).send({ error: true, message: "Missing user details. Please check your reqest.", details: result.error.details });
 
   } else {
     User.createUser(result, function(err, user) {
