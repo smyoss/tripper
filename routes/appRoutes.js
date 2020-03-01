@@ -1,6 +1,6 @@
 "use strict";
 module.exports = function(app) {
-  var user = require("../controller/appController.js");
+  var user = require("../controller/userController.js");
 
   // Default Route
   app.get("/", function(req, res) {
