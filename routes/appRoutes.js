@@ -14,6 +14,17 @@ module.exports = function(app) {
   app.get("/table", function(req, res) {
     res.render("pages/table");
   });
+
+  app.post('/register', function(req, res) {
+    res.render('login-register',{
+      register_error:allErrors,
+      old_data:req.body
+    });
+  });
+
+  app.use('/', (req,res) => {
+    res.status(404).send('<h1>404 Page Not Found!</h1>');
+  });
   
   // API STUFF
   // API User Routes
