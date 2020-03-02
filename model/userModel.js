@@ -1,5 +1,7 @@
 'user strict';
-const sql = require('./db.js');
+const dbConnection = require('../config');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 //User Functions
 
@@ -19,7 +21,7 @@ let User = function(user) {
 
 //get a listing of all users
 User.getAllUsers = function(result) {
-    sql.query("SELECT * FROM users", function (err,res) {
+    dbConnection.query("SELECT * FROM users", function (err,res) {
 
         if (err) {
             console.log("error: ", err);
@@ -35,7 +37,7 @@ User.getAllUsers = function(result) {
 //create a new user account
 
 User.createUser = function(newUser, result) {
-    sql.query("INSERT INTO users SET ?", newUser.value, function(err,res) {
+    dbConnection.query("INSERT INTO users SET ?", newUser.value, function(err,res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -49,7 +51,7 @@ User.createUser = function(newUser, result) {
 
 //get a specific user by id 
 User.getById = function (userId, result) {
-    sql.query("SELECT * FROM users WHERE id = ?", userId, function(err, res){
+    dbConnection.query("SELECT * FROM users WHERE id = ?", userId, function(err, res){
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -61,7 +63,7 @@ User.getById = function (userId, result) {
 
 //delete a specific user by id 
 User.deleteById = function(userId, result) {
-    sql.query('DELETE FROM users WHERE id =?', userId, function(err, res) {
+    dbConnection.query('DELETE FROM users WHERE id =?', userId, function(err, res) {
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -73,7 +75,7 @@ User.deleteById = function(userId, result) {
 
 //update a specific user by id
 User.updateById = function(userId, email, result) {
-    sql.query('UPDATE users SET email = ? WHERE id = ?', [User.email, User.id], function(err, res) {
+    dbConnection.query('UPDATE users SET email = ? WHERE id = ?', [User.email, User.id], function(err, res) {
         if(err) {
             console.log("error: ", err);
               result(null, err);

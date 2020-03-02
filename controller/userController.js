@@ -3,6 +3,7 @@
 const User = require("../model/userModel.js");
 const Joi = require("@hapi/joi");
 
+
 //user functions
 
 //list all users
