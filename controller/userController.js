@@ -35,7 +35,7 @@ exports.create_user = function(req, res) {
   } else {
     User.createUser(result, function(err, user) {
       if (err) res.send(err);
-      res.json(user);
+      res.json({result: 'User Created', userId: user, details: result});
     });
   }
 };
@@ -52,12 +52,27 @@ exports.getById = function(req, res) {
 
 // delete a specific user
 exports.deleteById = function(req, res) {
-    User.deleteById(req.params.userId, function(err, user) {
-        if(err)
-        res.send(err);
-        res.json({message: 'User deleted'});
+  
+  const schema = Joi.object ({
+    userId : Joi.number().integer().required(),
+  }); 
+  
+  const result = schema.validate(req.params.userId);
+  
+  console.log(result.value)
+
+  if (result.error) {
+    //400 bad request
+    res.status(400).send({ error: true, message: "Missing user details. Please check your reqest.", details: result.error.details });
+  } else {
+    User.deleteById(result, function(err, user) {
+      if (err) res.send(err);
+      console.log(result)
+      res.json({result: 'User Deleted', details: result});
     });
+  }
 };
+
 
 //update a specific user by id
 exports.updateById = function(req, res){

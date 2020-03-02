@@ -1,7 +1,5 @@
 'user strict';
 const dbConnection = require('../config');
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
 
 //User Functions
 
@@ -44,7 +42,9 @@ User.createUser = function(newUser, result) {
         }
         else {
             console.log(res.insertId);
-            result(null, res.insertId)
+            result(null, res.insertId);
+            //log insert into the database
+            dbConnection.query("INSERT INTO `log` (`table`, `action`, `value`, `foreignKey`) VALUES ('users','create','"+JSON.stringify(newUser)+"','"+res.insertId+"')");
         }
     });
 };
@@ -68,7 +68,11 @@ User.deleteById = function(userId, result) {
             console.log("error: ", err);
             result(err, null);
         }
-        else{ result(null, res);
+        else {
+            console.log(res);
+            result(null, "User ID: " + res);
+            //log insert into the database
+            dbConnection.query("INSERT INTO `log` (`table`, `action`, `value`, `foreignKey`) VALUES ('users','delete','User ID: "+userId+"','"+userId+"')");
         }
     });
 };
