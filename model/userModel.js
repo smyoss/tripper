@@ -62,8 +62,8 @@ User.getById = function (userId, result) {
 };
 
 //delete a specific user by id 
-User.deleteById = function(userId, result) {
-    dbConnection.query('DELETE FROM users WHERE id =?', userId, function(err, res) {
+User.deleteById = function(id, result) {
+    dbConnection.query('DELETE FROM users WHERE ?', id.value, function(err, res) {
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -72,7 +72,7 @@ User.deleteById = function(userId, result) {
             console.log(res);
             result(null, "User ID: " + res);
             //log insert into the database
-            dbConnection.query("INSERT INTO `log` (`table`, `action`, `value`, `foreignKey`) VALUES ('users','delete','User ID: "+userId+"','"+userId+"')");
+            dbConnection.query("INSERT INTO `log` (`table`, `action`, `value`, `foreignKey`) VALUES ('users','delete','User ID: "+res.value+"','"+res.value+"')");
         }
     });
 };

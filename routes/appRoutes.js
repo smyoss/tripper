@@ -11,19 +11,19 @@ module.exports = function(app) {
     res.render("pages/about");
   });
 
-  app.get("/table", function(req, res) {
-    res.render("pages/table");
+  app.get("/users", function(req, res) {
+    res.render("pages/users");
   });
   
   // API STUFF
   // API User Routes
   app
-    .route("/users")
+    .route("/api/users")
     .get(user.list_all_users)
     .post(user.create_user);
 
   app
-    .route("/users/:userId")
+    .route("/api/users/:id")
     .get(user.getById)
     .delete(user.deleteById)
     .put(user.updateById)

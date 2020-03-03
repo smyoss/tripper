@@ -1,0 +1,71 @@
+<!-- views/pages/users.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('../partials/head') %>
+  </head>
+  <body class="container">
+    <header>
+      <%- include ('../partials/header') %>
+    </header>
+
+    <main>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron">
+            <h1>This displays users</h1>
+
+            <div class="container">
+              <table id="user" class="display nowrap" width="100%">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+
+                <tfoot>
+                  <tr>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                  </tr>
+                </tfoot>
+
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <script>
+        // present users on the screen
+        $(document).ready( function () {
+            $('#user').DataTable({
+              ajax: {
+                url: "/api/users",
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                dataSrc: "",
+              },
+              columns: [
+                  { "data": "id" },
+                  { "data": "firstName" },
+                  { "data": "lastName" },
+                  { "data": "email" }
+          ]
+            });
+        } ); </script>
+      <%- include ('../partials/footer') %>
+    </footer>
+  </body>
+</html>

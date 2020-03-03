@@ -3,7 +3,6 @@
 const User = require("../model/userModel.js");
 const Joi = require("@hapi/joi");
 
-
 //user functions
 
 //list all users
@@ -52,27 +51,24 @@ exports.getById = function(req, res) {
 
 // delete a specific user
 exports.deleteById = function(req, res) {
-  
   const schema = Joi.object ({
-    userId : Joi.number().integer().required(),
-  }); 
-  
-  const result = schema.validate(req.params.userId);
-  
-  console.log(result.value)
+    id : Joi.number().integer().required(),
+  });
 
+  const result = schema.validate(req.params);
   if (result.error) {
     //400 bad request
     res.status(400).send({ error: true, message: "Missing user details. Please check your reqest.", details: result.error.details });
-  } else {
-    User.deleteById(result, function(err, user) {
-      if (err) res.send(err);
-      console.log(result)
-      res.json({result: 'User Deleted', details: result});
-    });
-  }
-};
 
+  } else {
+
+  User.deleteById(result, function(err, user) {
+      if(err)
+      res.send(err);
+      res.json({result: 'User Deleted', 'userId': result.value.id, details: result});
+  });
+};
+}
 
 //update a specific user by id
 exports.updateById = function(req, res){
